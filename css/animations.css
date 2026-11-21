@@ -1,0 +1,71 @@
+/* ==========================================================================
+   The Urban Plate — Animations
+   Subtle, purposeful motion. Disabled for users who prefer reduced motion.
+   ========================================================================== */
+
+/* Scroll reveal (activated by IntersectionObserver in main.js).
+   Only hide content when JS is running, so the site works without JS. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+  transition-delay: var(--delay, 0s);
+}
+.js [data-reveal="left"] { transform: translateX(-40px); }
+.js [data-reveal="right"] { transform: translateX(40px); }
+.js [data-reveal="zoom"] { transform: scale(.94); }
+.js [data-reveal].revealed { opacity: 1; transform: none; }
+
+/* Hero entrance */
+.hero-content > * { animation: fadeUp 1s var(--ease) both; }
+.hero-content > *:nth-child(1) { animation-delay: .15s; }
+.hero-content > *:nth-child(2) { animation-delay: .3s; }
+.hero-content > *:nth-child(3) { animation-delay: .45s; }
+.hero-content > *:nth-child(4) { animation-delay: .6s; }
+.hero-content > *:nth-child(5) { animation-delay: .75s; }
+.hero-card { animation: fadeUp 1s var(--ease) 1s both; }
+.page-hero .container > * { animation: fadeUp .9s var(--ease) both; }
+.page-hero .container > *:nth-child(2) { animation-delay: .12s; }
+.page-hero .container > *:nth-child(3) { animation-delay: .24s; }
+.page-hero .container > *:nth-child(4) { animation-delay: .36s; }
+
+/* Menu card entrance when filtering */
+.menu-grid .dish-card { animation: cardIn .5s var(--ease) both; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes heroZoom {
+  from { transform: scale(1.12); }
+  to { transform: scale(1.02); }
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes pinBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 currentColor; }
+  70% { box-shadow: 0 0 0 7px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js [data-reveal] { opacity: 1; transform: none; }
+}
