@@ -65,6 +65,7 @@
               <li><a href="menu.html?cat=asian"><i class="fa-solid fa-bowl-rice" aria-hidden="true"></i> Asian</a></li>
               <li><a href="menu.html?cat=desserts"><i class="fa-solid fa-ice-cream" aria-hidden="true"></i> Desserts</a></li>
               <li><a href="menu.html?cat=beverages"><i class="fa-solid fa-martini-glass-citrus" aria-hidden="true"></i> Beverages</a></li>
+              <li><a href="qr-menu.html"><i class="fa-solid fa-qrcode" aria-hidden="true"></i> QR Table Menu</a></li>
             </ul>
           </li>
           <li><a href="gallery.html" data-page="gallery">Gallery</a></li>
@@ -151,6 +152,19 @@
       </div>
 
       <p class="price-note">All prices are in Indian Rupees (₹) and exclusive of applicable taxes. Menu items and prices are fictional demonstration content. Please inform our staff of any allergies.</p>
+      <aside class="qr-promo" aria-labelledby="qrPromoTitle">
+        <div class="qr-promo-code" id="qrPromoCode" aria-hidden="true"></div>
+        <div>
+          <span class="eyebrow">New · QR Digital Menu</span>
+          <h3 id="qrPromoTitle">At your table? Scan &amp; browse.</h3>
+          <p>Every table has a QR code that opens a fast, phone-friendly menu. Browse dishes, filter veg, and build a list to show your server. Scan this code with your phone to try it.</p>
+          <div class="qr-promo-actions">
+            <a href="qr-menu.html?table=7" class="btn"><i class="fa-solid fa-qrcode" aria-hidden="true"></i> Open Table Menu</a>
+            <a href="qr-codes.html" class="btn btn-ghost-light"><i class="fa-solid fa-print" aria-hidden="true"></i> Print Table QR Codes</a>
+          </div>
+        </div>
+      </aside>
+
       <div class="center-actions">
         <a href="reservation.html" class="btn"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i> Reserve a Table</a>
       </div>
@@ -181,6 +195,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="menu.html">Our Menu</a></li>
+          <li><a href="qr-menu.html">QR Table Menu</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="experience.html">Our Experience</a></li>
           <li><a href="reservation.html">Reserve a Table</a></li>
@@ -223,6 +238,8 @@
   <button class="back-to-top" type="button" aria-label="Back to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
 
 <script src="js/main.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" referrerpolicy="no-referrer" defer></script>
+<script src="js/menu-data.js" defer></script>
 <script src="js/menu.js" defer></script>
 </body>
 </html>

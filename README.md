@@ -22,6 +22,8 @@ It's built with plain **HTML5, CSS3 and Vanilla JavaScript**: no frameworks, no 
 | Our Experience | `experience.html` | Ambience, family, romantic, birthdays, corporate, private events, spaces |
 | Reservation | `reservation.html` | Validated demo form, no past dates (60-day window), live time-slot picker, guest stepper, occasion chips, live summary, confirmation modal saying **no booking was made**, FAQ |
 | Contact | `contact.html` | Contact cards, demo contact form, WhatsApp, opening hours with live open/closed status, map placeholder with Get Directions, FAQ |
+| QR Table Menu | `qr-menu.html` | Mobile-first menu opened by scanning a table's QR code (`/qr-menu?table=12`). Shows the table number, sticky category chips with scroll-spy, search, Veg-only and Popular filters, dish detail sheets, and a "My List" shortlist with a ₹ estimated total that guests can share or show to their server (no ordering) |
+| Table QR Codes | `qr-codes.html` | Staff tool (not indexed by search engines). Generates printable QR table cards for any table range (6 per A4 page), plus a general entrance card. Each card can be downloaded as an image |
 | 404 | `404.html` | Custom not-found page (Cloudflare Pages serves it automatically) |
 
 ## Features
@@ -33,19 +35,36 @@ It's built with plain **HTML5, CSS3 and Vanilla JavaScript**: no frameworks, no 
 - SEO: unique titles and meta descriptions, Open Graph tags, `sitemap.xml`, `robots.txt` and a favicon
 - Performance: local WebP images, below-the-fold images are lazy-loaded, the hero image is preloaded, image sizes are set to avoid layout shift, and there are no JS libraries
 
+## QR Digital Menu
+
+1. Open **`/qr-codes`** (or `qr-codes.html`), choose a table range and click **Print cards**.
+2. Put each card on its table. Its code opens `https://ramrestaurant-demo.pages.dev/qr-menu?table=N`.
+3. Guests scan the code with their phone camera. The table menu opens with their table number shown, and they can shortlist dishes and show the list to their server.
+
+Notes:
+- The shortlist is saved separately for each table in the guest's own browser (`localStorage`). Nothing is sent or ordered.
+- Menu items come from one shared file, `js/menu-data.js`, so `menu.html` and `qr-menu.html` always match.
+- QR codes are generated in the browser with the open-source [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) library (MIT), loaded from cdnjs. The menu page also shows a scannable code so desktop visitors can try the mobile menu.
+- If you host the site on another domain, change the **Menu link** field on the QR codes page before printing.
+
 ## Project structure
 
 ```
 restaurant-website/
 ├── index.html  about.html  menu.html  gallery.html
 ├── experience.html  reservation.html  contact.html  404.html
+├── qr-menu.html  qr-codes.html
 ├── css/
 │   ├── style.css        # design system + all components
 │   ├── responsive.css   # breakpoints (1280 / 1100 / 992 / 768 / 560 / 400)
-│   └── animations.css   # reveal + keyframes, reduced-motion support
+│   ├── animations.css   # reveal + keyframes, reduced-motion support
+│   └── qr-menu.css      # mobile QR table menu
 ├── js/
 │   ├── main.js          # nav, dropdowns, reveal, FAQ, back-to-top, contact form, toast
-│   ├── menu.js          # menu data (INR) + filtering/search
+│   ├── menu-data.js     # shared menu data (48 dishes, INR)
+│   ├── menu.js          # menu page filtering/search
+│   ├── qr-menu.js       # QR table menu + shortlist
+│   ├── qr-codes.js      # printable table QR cards
 │   ├── gallery.js       # filters + lightbox
 │   └── reservation.js   # validation, date limits, time slots, confirmation modal
 ├── assets/
@@ -116,6 +135,6 @@ To swap a photo, replace the file and keep the same name, or point the `src` in 
 ## Customising
 
 - **Colours and fonts:** edit the CSS variables at the top of `css/style.css` (`--accent`, `--ink`, `--cream`, `--font-display` and so on).
-- **Menu items and prices:** edit the `DISHES` array in `js/menu.js`.
+- **Menu items and prices:** edit `js/menu-data.js` (shared by the menu and the QR table menu).
 - **Time slots:** edit `SLOT_GROUPS` in `js/reservation.js`.
 - **Real bookings:** connect the reservation form to a service such as Formspree, Cloudflare Workers or a reservations platform, and remove the demo notices.

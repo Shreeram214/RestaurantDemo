@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Table Menu | The Urban Plate — Scan, Browse &amp; Shortlist</title>
+  <meta name="description" content="The Urban Plate's QR table menu — a fast, mobile-friendly menu you open by scanning the QR code on your table. Browse dishes, filter veg, and build a shortlist to show your server.">
+  <meta name="theme-color" content="#fbf7f1">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Urban Plate">
+  <meta property="og:image" content="https://ramrestaurant-demo.pages.dev/assets/images/hero/a-beautifully-plated-spread-of-1200.webp">
+  <link rel="canonical" href="https://ramrestaurant-demo.pages.dev/qr-menu">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Jost:wght@300;400;500;600&amp;display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/qr-menu.css">
+</head>
+<body class="qr-body" data-page="qr-menu">
+  <a class="skip-link" href="#qrList">Skip to dishes</a>
+
+  <header class="qr-top">
+    <div class="qr-wrap qr-top-inner">
+      <a href="index.html" class="qr-brand" aria-label="The Urban Plate — full website">
+        <span class="logo-mark" aria-hidden="true">UP</span>
+        <span><strong>The Urban Plate</strong><small>Table Menu</small></span>
+      </a>
+      <div class="qr-top-actions">
+        <span class="table-chip" id="tableChip" hidden><i class="fa-solid fa-chair" aria-hidden="true"></i> Table <span id="tableNum"></span></span>
+        <a href="tel:+919876543210" class="icon-btn" aria-label="Call the restaurant"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="qr-wrap" id="main">
+    <section class="qr-hero" aria-label="Welcome">
+      <img src="assets/images/interior/inviting-restaurant-interior-with-warm-900.webp" alt="" width="900" height="500" fetchpriority="high">
+      <div>
+        <h1 id="qrGreeting">Welcome!</h1>
+        <p>Browse the menu, tap <strong>ADD</strong> to build your list, then show it to your server when you're ready to order.</p>
+      </div>
+    </section>
+
+    <p class="qr-demo" role="note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span><strong>Demo:</strong> fictional restaurant. Your list stays on this phone. Nothing is ordered or sent.</span></p>
+
+    <div class="qr-tools">
+      <div class="qr-search" role="search">
+        <label for="qrSearch" class="sr-only">Search dishes</label>
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <input type="search" id="qrSearch" placeholder="Search dishes…" autocomplete="off" enterkeyhint="search">
+        <button type="button" class="search-clear" id="qrSearchClear" aria-label="Clear search"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <button type="button" class="veg-switch" id="vegSwitch" aria-pressed="false"><span class="track" aria-hidden="true"></span><span class="label">Veg only</span><span class="sr-only"> filter</span></button>
+    </div>
+
+    <nav class="qr-cats" aria-label="Menu categories">
+      <div class="qr-cats-scroll" id="qrChips"></div>
+    </nav>
+
+    <div id="qrList"></div>
+
+    <div class="qr-empty" id="qrEmpty">
+      <i class="fa-solid fa-plate-wheat" aria-hidden="true"></i>
+      <p>No dishes match your search.</p>
+      <button type="button" class="btn btn-outline btn-sm" id="qrReset">Clear filters</button>
+    </div>
+
+    <section class="qr-info" aria-labelledby="infoTitle">
+      <h3 id="infoTitle">Need anything?</h3>
+      <ul>
+        <li><i class="fa-solid fa-bell-concierge" aria-hidden="true"></i><span>Raise your hand or tell any team member. We're happy to help.</span></li>
+        <li><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Allergies or dietary needs? Please tell your server before ordering.</span></li>
+        <li><i class="fa-regular fa-clock" aria-hidden="true"></i><span>Open daily 11:00 AM – 11:00 PM · kitchen closes 10:30 PM</span></li>
+        <li><i class="fa-solid fa-wifi" aria-hidden="true"></i><span>Free Wi-Fi: ask your server for today's password.</span></li>
+      </ul>
+      <div class="qr-links">
+        <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <a href="index.html" class="btn btn-outline btn-sm">Full website</a>
+        <a href="reservation.html" class="btn btn-outline btn-sm">Book next visit</a>
+      </div>
+      <p class="qr-note">Prices in INR, excluding applicable taxes. All dishes, prices and details are fictional demo content.</p>
+    </section>
+  </main>
+
+  <!-- Floating shortlist bar -->
+  <div class="list-bar" id="listBar" aria-hidden="true">
+    <div><strong>My List</strong><span id="barCount">0 items · ₹0</span></div>
+    <button type="button" class="btn" id="openList"><i class="fa-solid fa-list-check" aria-hidden="true"></i> View list</button>
+  </div>
+
+  <div class="sheet-backdrop" id="sheetBackdrop"></div>
+
+  <!-- Dish details -->
+  <div class="sheet" id="dishSheet" role="dialog" aria-modal="true" aria-labelledby="dishSheetTitle" aria-hidden="true">
+    <button type="button" class="sheet-close" data-close-sheet aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <div id="dishSheetContent"></div>
+  </div>
+
+  <!-- My list -->
+  <div class="sheet list-sheet" id="listSheet" role="dialog" aria-modal="true" aria-labelledby="listSheetTitle" aria-hidden="true">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <button type="button" class="sheet-close" data-close-sheet aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <div class="sheet-body">
+      <h2 id="listSheetTitle">My List</h2>
+      <p class="sub" id="listSub"></p>
+      <div id="listRows"></div>
+      <div class="list-total"><span>Estimated total</span><span class="price" id="listTotal">₹0</span></div>
+      <p class="list-hint"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span><strong>This is not an order.</strong> Show this list to your server to place your order. Total excludes taxes.</span></p>
+      <div class="list-actions" id="listActions">
+        <button type="button" class="btn btn-outline" id="shareList"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Share</button>
+        <button type="button" class="btn" data-close-sheet><i class="fa-solid fa-check" aria-hidden="true"></i> Done</button>
+        <button type="button" class="btn btn-clear" id="clearList"><i class="fa-regular fa-trash-can" aria-hidden="true"></i> Clear list</button>
+      </div>
+    </div>
+  </div>
+
+<script src="js/main.js" defer></script>
+<script src="js/menu-data.js" defer></script>
+<script src="js/qr-menu.js" defer></script>
+</body>
+</html>
